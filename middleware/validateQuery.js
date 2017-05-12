@@ -1,4 +1,3 @@
-"use strict";
 
 const inspector = require("schema-inspector");
 const _ = require("lodash");

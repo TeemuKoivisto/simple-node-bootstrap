@@ -1,11 +1,10 @@
-"use strict";
 
 const models = require("./schemas");
 
 module.exports.destroyTables = () => {
   return Promise.all(Object.keys(models).map(key => {
     if ({}.hasOwnProperty.call(models, key)) {
-      return models[key].remove();
+      return models[key].remove({});
     }
   }));
 };
@@ -18,10 +17,11 @@ module.exports.destroyTables = () => {
 module.exports.dropTables = () => {
   return Promise.all(Object.keys(models).map(key => {
     if ({}.hasOwnProperty.call(models, key)) {
+      console.log(key)
       let mongoose = require("./db_connection");
       // duh doesn't work :/
       return mongoose.connection.db.dropDatabase();
-      // return mongoose.connection.collections["items"].drop();
+      // return mongoose.connection.collections[key].drop();
     }
   }))
 };

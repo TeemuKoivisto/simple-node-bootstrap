@@ -1,4 +1,3 @@
-"use strict";
 
 const TokenGenerator = require("../services/TokenGenerator");
 const PasswordHelper = require("../services/PasswordHelper");
@@ -95,6 +94,9 @@ module.exports.loginUser = (req, res, next) => {
       const payload = TokenGenerator.generateLoginPayload(user);
       const token = TokenGenerator.generateToken(payload);
       user.passwordHash = undefined;
+      console.log("TokenGenerator")
+      // TokenGenerator.secret = "penis"
+      console.log(TokenGenerator.secret)
       res.status(200).send({
         user,
         token,

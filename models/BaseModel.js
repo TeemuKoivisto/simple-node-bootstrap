@@ -1,4 +1,3 @@
-"use strict";
 
 const Models = require("../db/schemas");
 

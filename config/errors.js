@@ -1,4 +1,3 @@
-"use strict";
 
 function BadRequestError(message, details) {
   this.name = "BadRequestError";

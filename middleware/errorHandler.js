@@ -1,4 +1,3 @@
-"use strict";
 
 const errors = require("../config/errors");
 
@@ -11,6 +10,7 @@ module.exports.handleErrors = (err, req, res, next) => {
     const statusCode = err.statusCode !== undefined ? err.statusCode : 500;
 
     if (process.env.NODE_ENV === "development") {
+      console.log("yo virhe", err)
       console.log(JSON.stringify(err, null, 2))
       if (err.message !== undefined) {
         res.status(statusCode).send(err);

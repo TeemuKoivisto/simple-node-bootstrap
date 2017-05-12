@@ -1,4 +1,3 @@
-"use strict";
 
 const errors = require("../config/errors");
 

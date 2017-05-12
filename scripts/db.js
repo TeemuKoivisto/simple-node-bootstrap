@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-"use strict";
-
 if (!process.env.NODE_ENV) {
   require("dotenv").config();
 }
@@ -25,13 +23,13 @@ if (commands.length > 2) {
     //     process.exit();
     //   })
     //   break;
-    // case "drop":
-    //   db_methods.dropTables()
-    //   .then(() => {
-    //     console.log("Tables dropped!");
-    //     process.exit();
-    //   })
-    //   break;
+    case "drop":
+      db_methods.dropTables()
+      .then(() => {
+        console.log("Tables dropped!");
+        process.exit();
+      })
+      break;
     case "add":
       db_methods.addTestData()
       .then(() => {
@@ -85,6 +83,7 @@ if (commands.length > 2) {
       break;
     default:
       console.log(`Unknown command ${command}`);
+      process.exit();
       break;
   }
 }

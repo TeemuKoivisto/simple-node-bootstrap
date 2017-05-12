@@ -1,16 +1,15 @@
-"use strict";
 
 const bcrypt = require("bcrypt-nodejs");
 // const passwordGenerator = require("password-generator");
 
-class PasswordHelper {
+const PasswordHelper = {
 
   hashPassword(password) {
-    return bcrypt.hashSync(password);
-  }
+    return bcrypt.hashSync(password)
+  },
 
   comparePassword(password, hash) {
-    return bcrypt.compareSync(password, hash);
+    return bcrypt.compareSync(password, hash)
   }
 
   // generatePassword() {
@@ -18,5 +17,4 @@ class PasswordHelper {
   // }
 }
 
-module.exports = new PasswordHelper();
-module.exports.class = PasswordHelper;
+module.exports = PasswordHelper

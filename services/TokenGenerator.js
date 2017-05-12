@@ -1,22 +1,21 @@
-"use strict";
 
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken")
 
-class TokenGenerator {
-  constructor(secret) {
-    this.secret = secret;
-  }
-  verifyToken(token, options) {
-    return jwt.verify(token, this.secret, options);
-  }
-  isTokenExpired(decodedToken) {
+const TokenGenerator = (secret) => ({
+  secret: secret,
+  verifyToken: (token, options) => {
+    return jwt.verify(token, secret, options)
+  },
+  isTokenExpired: (decodedToken) => {
     // return new Date() > decodedToken.expires;
-    return Math.floor(Date.now() / 1000) > decodedToken.expires;
-  }
-  generateToken(payload) {
-    return jwt.sign(payload, this.secret, { audience: payload.audience });
-  }
-  generateLoginPayload(user) {
+    return Math.floor(Date.now() / 1000) > decodedToken.expires
+  },
+  generateToken: function (payload) {
+    return jwt.sign(payload, secret, { audience: payload.audience })
+  },
+  generateLoginPayload: function(user) {
+    console.log(this.secret)
+    console.log(this.generateToken("asdf"));
     const payload = {
       user: {
         id: user.id,
@@ -27,10 +26,9 @@ class TokenGenerator {
       // expires in two days in seconds
       expires: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 2,
       // expiresIn: 172800, // seconds
-    };
-    return payload;
+    }
+    return payload
   }
-}
+})
 
-module.exports = new TokenGenerator(process.env.TOKEN_SECRET);
-module.exports.class = TokenGenerator;
+module.exports = Object.freeze(TokenGenerator(process.env.TOKEN_SECRET))

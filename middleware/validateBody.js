@@ -1,4 +1,3 @@
-"use strict";
 
 const inspector = require("schema-inspector");
 const _ = require("lodash");
@@ -20,7 +19,8 @@ module.exports.validateBody = (name, schema) => (req, res, next) => {
   if (validation) {
     const result = inspector.validate(validation, req.body);
     if (result.error.length !== 0) {
-      throw new errors.BadRequestError(`${result.error[0].property} ${result.error[0].message}`, result.error);
+      throw new errors.BadRequestError(`${result.error[0].property} ${result.error[0].message}`,
+        result.error);
     }
   }
   next();

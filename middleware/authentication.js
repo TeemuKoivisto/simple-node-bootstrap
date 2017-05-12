@@ -1,4 +1,3 @@
-"use strict";
 
 const TokenGenerator = require("../services/TokenGenerator");
 const errors = require("../config/errors");
