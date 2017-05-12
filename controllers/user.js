@@ -87,16 +87,13 @@ module.exports.loginUser = (req, res, next) => {
   .findOne({ email: req.body.email })
   .then(user => {
     if (!user) {
-      throw new errors.NotFoundError("No user found with given email.");
+      throw new errors.AuthenticationError("No user found with given email.");
     } else if (!PasswordHelper.comparePassword(req.body.password, user.passwordHash)) {
       throw new errors.AuthenticationError("Incorrect password.");
     } else {
       const payload = TokenGenerator.generateLoginPayload(user);
       const token = TokenGenerator.generateToken(payload);
       user.passwordHash = undefined;
-      console.log("TokenGenerator")
-      // TokenGenerator.secret = "penis"
-      console.log(TokenGenerator.secret)
       res.status(200).send({
         user,
         token,

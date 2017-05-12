@@ -10,12 +10,11 @@ const errors = require("../config/errors");
  * it lets the user to access the controller's method.
  */
 module.exports.authenticate = (req, res, next) => {
-  // correct header for JWTs would be Authorization: Bearer <token>
-  // but this is much easier to parse and not so professional
-  if (!req.headers["x-access-token"]) {
+  if (!req.headers["authorization"]) {
     throw new errors.AuthenticationError("Please make sure your request has X-Access-Token header.");
   }
-  const decoded = TokenGenerator.verifyToken(req.headers["x-access-token"], { audience: "login" });
+  const token = req.headers["authorization"].substring(7) // parse token -> Bearer ${TOKEN}
+  const decoded = TokenGenerator.verifyToken(token, { audience: "login" });
   if (TokenGenerator.isTokenExpired(decoded)) {
     throw new errors.LoginTimeoutError("Your token has expired. Please re-login.");
   } else {

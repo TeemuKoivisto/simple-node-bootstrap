@@ -1,16 +1,15 @@
-'use strict';
 
 /**
  * If no NODE_ENV has been set load env variables from .env -file
  */
 if (!process.env.NODE_ENV) {
-  require('dotenv').config();
+  require("dotenv").config();
 }
 
-const express = require('express');
-const busboy = require('connect-busboy');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const express = require("express");
+const busboy = require("connect-busboy");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const app = express();
 
@@ -19,9 +18,9 @@ const port = process.env.PORT || 3332;
 /**
  * If NODE_ENV is not production use morgan to log all queries to the console
  */
-if (process.env.NODE_ENV !== 'production') {
-  const logger = require('morgan');
-  app.use(logger('dev'));
+if (process.env.NODE_ENV !== "production") {
+  const logger = require("morgan");
+  app.use(logger("dev"));
 }
 
 /**
@@ -36,20 +35,20 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 /**
- * CORS is shorthand for 'Cross-Origin-Resource-Sharing' which means that this API
+ * CORS is shorthand for "Cross-Origin-Resource-Sharing" which means that this API
  * will accept request made outside its native port.
  */
 app.use(cors());
 
 /**
- * This loads the routes defined in ./config/routes to the root path ''.
+ * This loads the routes defined in ./config/routes to the root path "".
  */
-app.use('', require('./config/routes'));
+app.use("", require("./config/routes"));
 
 /**
- * If module has no parent which means that it has been loaded directly with 'node app.js'
+ * If module has no parent which means that it has been loaded directly with "node app.js"
  * then start up the server. This is used for testing when starting up the server is
- * unpreferred when loading this file with 'require('app')'.
+ * unpreferred when loading this file with "require("app")".
  */
 if (!module.parent) {
   app.listen(port, (err) => {
