@@ -1,21 +1,21 @@
 
 const jwt = require("jsonwebtoken")
 
-const TokenGenerator = (secret) => ({
-  secret: secret,
-  verifyToken: (token, options) => {
-    return jwt.verify(token, secret, options)
-  },
-  isTokenExpired: (decodedToken) => {
+class TokenGenerator {
+  constructor(secret) {
+    this.secret = secret;
+  }
+  verifyToken(token, options) {
+    return jwt.verify(token, this.secret, options)
+  }
+  isTokenExpired(decodedToken) {
     // return new Date() > decodedToken.expires;
     return Math.floor(Date.now() / 1000) > decodedToken.expires
-  },
-  generateToken: function (payload) {
-    return jwt.sign(payload, secret, { audience: payload.audience })
-  },
-  generateLoginPayload: function(user) {
-    console.log(this.secret)
-    console.log(this.generateToken("asdf"));
+  }
+  generateToken(payload) {
+    return jwt.sign(payload, this.secret, { audience: payload.audience })
+  }
+  generateLoginPayload(user) {
     const payload = {
       user: {
         id: user.id,
@@ -29,6 +29,7 @@ const TokenGenerator = (secret) => ({
     }
     return payload
   }
-})
+}
 
-module.exports = Object.freeze(TokenGenerator(process.env.TOKEN_SECRET))
+module.exports = new TokenGenerator(process.env.TOKEN_SECRET)
+module.exports.class = TokenGenerator
