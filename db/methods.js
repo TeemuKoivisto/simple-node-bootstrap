@@ -1,30 +1,26 @@
 
-const models = require("./schemas");
+const models = require("./schemas")
 
-module.exports.destroyTables = () => {
-  return Promise.all(Object.keys(models).map(key => {
-    if ({}.hasOwnProperty.call(models, key)) {
-      return models[key].remove({});
-    }
-  }));
-};
+module.exports.destroyTables = () => Promise.all(Object.keys(models).map((key) => {
+  if ({}.hasOwnProperty.call(models, key)) {
+    return models[key].remove({})
+  }
+}))
 
 // module.exports.createTables = () => {
 //   return tables.syncForce();
 //   // return tables.sync();
 // };
 
-module.exports.dropTables = () => {
-  return Promise.all(Object.keys(models).map(key => {
-    if ({}.hasOwnProperty.call(models, key)) {
-      console.log(key)
-      let mongoose = require("./db_connection");
+module.exports.dropTables = () => Promise.all(Object.keys(models).map((key) => {
+  if ({}.hasOwnProperty.call(models, key)) {
+    console.log(key)
+    const mongoose = require("./db_connection")
       // duh doesn't work :/
-      return mongoose.connection.db.dropDatabase();
+    return mongoose.connection.db.dropDatabase()
       // return mongoose.connection.collections[key].drop();
-    }
-  }))
-};
+  }
+}))
 
 module.exports.addTestData = () => Promise.all([
   models.Item.create({
@@ -49,13 +45,11 @@ module.exports.addTestData = () => Promise.all([
   }),
 ])
 
-module.exports.dump = () => {
-  return Promise.all(Object.keys(models).map(key => {
-    if ({}.hasOwnProperty.call(models, key)) {
-      return models[key].find({});
-    }
-  }));
-};
+module.exports.dump = () => Promise.all(Object.keys(models).map((key) => {
+  if ({}.hasOwnProperty.call(models, key)) {
+    return models[key].find({})
+  }
+}))
 
 // module.exports.dropAndCreateTables = () => {
 //   return module.exports.createTables()
@@ -69,7 +63,5 @@ module.exports.dump = () => {
 //   });
 // };
 
-module.exports.resetTestData = () => {
-  return module.exports.destroyTables()
+module.exports.resetTestData = () => module.exports.destroyTables()
     .then(() => module.exports.addTestData())
-};

@@ -3,19 +3,19 @@ const sanitizations = {
     login: {
       type: "object",
       properties: {
-        email: { type: "string", rules: ["trim", "lower"] }
-      }
+        email: { type: "string", rules: ["trim", "lower"] },
+      },
     },
     save: {
       type: "object",
       properties: {
         firstname: { type: "string", rules: ["trim", "title"] },
         lastname: { type: "string", rules: ["trim", "title"] },
-        email: { type: "string", rules: ["trim", "lower"] }
-      }
+        email: { type: "string", rules: ["trim", "lower"] },
+      },
     },
   },
-};
+}
 
 const validations = {
   user: {
@@ -24,7 +24,7 @@ const validations = {
       properties: {
         email: { type: "string", pattern: "email" },
         password: { type: "string", minLength: 1 },
-      }
+      },
     },
     save: {
       type: "object",
@@ -33,7 +33,7 @@ const validations = {
         lastname: { type: "string", minLength: 1 },
         email: { type: "string", pattern: "email" },
         password: { type: "string", minLength: 8 },
-      }
+      },
     },
   },
   item: {
@@ -41,10 +41,10 @@ const validations = {
       type: "object",
       properties: {
         content: { type: "string", minLength: 1 },
-      }
-    }
-  }
-};
+      },
+    },
+  },
+}
 
 module.exports = {
   sanitizations,

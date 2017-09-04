@@ -4,7 +4,7 @@
   "description": "simple bootstrap for node",
   "main": "app.js",
   "engines": {
-    "node": "^6.0.0"
+    "node": ">=8"
   },
   "scripts": {
     "lint": "eslint ./**/*.js || true",
@@ -12,9 +12,10 @@
     "start": "node ./scripts/check_prod.js && node app.js || nodemon app.js",
     "pm2:start": "pm2 start -n myapp-api app.js",
     "db": "node ./scripts/db.js",
-    "test": "istanbul cover node_modules/mocha/bin/_mocha --require test/testhelper.js test/**/*.js",
-    "test:noc": "mocha --require test/testhelper.js test/**/*.js",
-    "test:watch": "npm run test -- --watch"
+    "test": "npm run test:unit",
+    "test:unit": "istanbul cover node_modules/mocha/bin/_mocha --require test/testhelper.js test/unit/**/*.js",
+    "test:unit:noc": "mocha --require test/testhelper.js test/unit/**/*.js",
+    "test:unit:watch": "npm run test:unit -- --watch"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
     "coveralls": "^2.13.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-react": "^7.0.0",
     "istanbul": "^0.4.5",
     "mocha": "3.3.0",
