@@ -1,8 +1,10 @@
 language: node_js
+node_js:
+  - 8
 script:
-- npm --silent run lint
-- npm --silent test
-- cat ./coverage/lcov.info | coveralls
+  - npm --silent run lint
+  - npm --silent test
+  - cat ./coverage/lcov.info | coveralls
 deploy:
   provider: heroku
   api_key:
@@ -11,6 +13,4 @@ deploy:
   on:
     repo: TeemuKoivisto/simple-node-bootstrap
 notifications:
-  email:
-    on_success: never
-    on_failure: never
+  email: false
