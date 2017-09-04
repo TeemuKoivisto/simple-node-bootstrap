@@ -92,11 +92,11 @@ module.exports.loginUser = (req, res, next) => {
       throw new errors.AuthenticationError("Incorrect password.")
     } else {
       const payload = TokenGenerator.generateLoginPayload(user)
-      const token = TokenGenerator.generateToken(payload)
+      const jwt = TokenGenerator.generateToken(payload)
       user.passwordHash = undefined
       res.status(200).send({
         user,
-        token,
+        jwt,
         expires: payload.expires,
       })
     }

@@ -4,7 +4,7 @@
   "description": "simple bootstrap for node",
   "main": "app.js",
   "engines": {
-    "node": ">=8"
+    "node": ">= 8"
   },
   "scripts": {
     "lint": "eslint ./**/*.js || true",
@@ -36,17 +36,17 @@
     "schema-inspector": "^1.6.8"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.1.2",
     "coveralls": "^2.13.1",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^14.1.0",
+    "eslint": "^4.6.1",
+    "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-react": "^7.0.0",
     "istanbul": "^0.4.5",
-    "mocha": "3.3.0",
+    "mocha": "3.5.0",
     "nock": "^9.0.13",
     "nodemon": "^1.11.0",
-    "sinon": "^2.2.0",
+    "sinon": "^3.2.1",
     "supertest": "^3.0.0"
   }
 }

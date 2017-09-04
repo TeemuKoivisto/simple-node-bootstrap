@@ -1,6 +1,7 @@
 
 const errors = require("../config/errors")
 
+const { NODE_ENV } = process.env
 /**
  * Middleware for handling all the errors thrown by other middlewares and controllers
  * and generating proper responses.
@@ -9,7 +10,7 @@ module.exports.handleErrors = (err, req, res, next) => {
   if (err) {
     const statusCode = err.statusCode !== undefined ? err.statusCode : 500
 
-    if (process.env.NODE_ENV === "development") {
+    if (NODE_ENV === "development") {
       // console.log("yo virhe", err)
       console.log(JSON.stringify(err, null, 2))
       if (err.message !== undefined) {
